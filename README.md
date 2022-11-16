@@ -1,2 +1,2 @@
 # WorldCup
-World Cup score / match tracker 
+World Cup stats / match tracker 
