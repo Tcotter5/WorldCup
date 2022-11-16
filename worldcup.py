@@ -2,9 +2,13 @@
 # pip install beautifulsoup4
 # pip install pretty printer (get a better idea of where to call on html file upon first scrape)
 import pprint
+# pip install panadas
+# pip install lxml
+# pip install html5lib
 
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
 
 url = "https://fbref.com/en/comps/1/schedule/World-Cup-Scores-and-Fixtures"
 
@@ -22,7 +26,22 @@ links = [l.get("href") for l in links]
 
 # filter links to only get squad links via list comprehension, "is squad in link/ if not do not retrieve"
 links = [l for l in links if '/squads/' in l]
-print(links)
+
+# add additional https: to partial urls from before
+squad_urls = [f"https://fbref.com{l}" for l in links]
+
+# get first link
+squad_urls = squad_urls[0]
+
+result = requests.get(squad_urls)
+
+matches = pd.read_html(result.text, match="Home & Away")
+
+print(matches)
+
+
+
+
 
 
 
