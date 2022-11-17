@@ -8,6 +8,8 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+from pandas import DataFrame
+
 
 url = "https://fbref.com/en/comps/1/schedule/World-Cup-Scores-and-Fixtures"
 
@@ -17,12 +19,13 @@ result = requests.get(url)
 doc = BeautifulSoup(result.text, "html.parser")
 
 # pass html (result.text) /  find specific string using match
-matches = pd.read_html(result.text, match="Scores & Fixtures")
+match_table = pd.read_html(result.text, match="Scores & Fixtures")
 
 # wanted to see all available columns, only showing 4 beforehand
-pd.options.display.max_columns = 14
+# pd.options.display.max_columns = 14
 
-print(matches[0].head(0))
+print(match_table)
+#print(match_table[0])
 
 
 
