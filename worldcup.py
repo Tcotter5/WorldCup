@@ -22,33 +22,15 @@ doc = BeautifulSoup(result.text, "html.parser")
 match_table = pd.read_html(result.text, match="Scores & Fixtures")
 
 # wanted to see all available columns, only showing 4 beforehand
-# pd.options.display.max_columns = 14
+pd.options.display.max_columns = 14
+#make a list in order out of match_table
+table = match_table[1]
+#extract contents wanted from table
+table_two = table[['Date', 'Home', 'Score', 'Away', 'Attendance']]
 
-print(match_table)
-#print(match_table[0])
+print(table_two)
 
 
-
-# ***** keeping old code commented out, not what I wanted to do but good to have for reference *******
-# find table via inspect tool / search on first instance of class name stats_table using 0
-# table = doc.select('table.stats_table')[0]
-
-# find all instances of a within html file
-# links = table.find_all('a')
-
-# grab hrefs
-# links = [l.get("href") for l in links]
-
-# filter links to only get squad links via list comprehension, "is squad in link/ if not do not retrieve"
-# links = [l for l in links if '/squads/' in l]
-
-# add additional https: to partial urls from before
-# squad_urls = [f"https://fbref.com{l}" for l in links]
-
-# get first link
-# squad_urls = squad_urls[0]
-
-# matches = pd.read_html(result.text, match="Home & Away")
 
 
 
